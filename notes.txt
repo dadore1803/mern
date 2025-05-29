@@ -1,0 +1,15 @@
+modules - 
+1. npm init  - to initiate 
+2. npm install express 
+3. npm install mongoose 
+4. npm install body-parser
+5. npm install ejs
+
+MVC Pattern - 
+Model View Controler 
+
+views - web page
+public - public data
+models - database 
+controllers - logic 
+routes - url of pages 

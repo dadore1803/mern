@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .parentdiv{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+    .childdiv{
+      background: #dee7f1;
+      width: 20%;
+    }
+  </style>
+</head>
+<body>
+  <div class="parentdiv">
+    <% if(productlist.length>0){%>
+    <% productlist.forEach((data)=>{ %>
+    <div class="childdiv">
+      <h1><%= data.pname %></h1>
+      <img src="<%= data.pimage %>" alt="" width="100%">
+    </div>
+    <% }) %>
+    <% } else {%>
+      <div>data nhi k liye</div>
+   <%}%>
+  </div>
+</body>
+</html>
+
+  
+
