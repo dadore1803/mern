@@ -1,11 +1,14 @@
 const express = require('express');
 const multer = require('multer');
 const Product = require('../models/productmodel');
-
+const path = require('path')
 const productImage = multer.diskStorage({
     destination:'public/productimage',
+
     filename:(req,file,tempname)=>{
-        tempname(null,file.originalname)
+        const oldname = path.extname(file.originalname)
+        uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${oldname}`;
+        tempname(null,uniqueName)
     },
 })
 const uploadimage = multer({storage:productImage})
