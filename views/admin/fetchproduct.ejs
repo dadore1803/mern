@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: flex; gap: 30px;">
+
+        <% data.forEach((key)=>{ %>
+
+            <div>
+                <h1><%= key.name %></h1>
+                
+                <form action="/fetchdata/<%= key._id%>" method="get">
+                    <button>update</button>
+                </form>
+            </div>
+
+        <%})%>
+    </div>
+    
+</body>
+</html>

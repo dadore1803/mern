@@ -3,6 +3,7 @@
     const loginRoutes = require('./routes/loginroutes')
     const dashRoutes = require('./routes/dashboard')
     const addProductRoute = require('./routes/addproduct')
+
     const bodyParser = require('body-parser')
     const multer = require('multer')
     const cookieParser = require('cookie-parser');
