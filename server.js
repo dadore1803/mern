@@ -3,7 +3,7 @@
     const loginRoutes = require('./routes/loginroutes')
     const dashRoutes = require('./routes/dashboard')
     const addProductRoute = require('./routes/addproduct')
-
+    const fetchproduct = require('./routes/productRoutes')
     const bodyParser = require('body-parser')
     const multer = require('multer')
     const cookieParser = require('cookie-parser');
@@ -28,13 +28,15 @@
     const uploadimage = multer({storage:productImage})
 
 
-app.use('/sirt', signupRoutes)
+app.use('/', signupRoutes)
 
 app.use('/', loginRoutes)
 
 app.use('/', dashRoutes)
 
 app.use('/' ,addProductRoute)
+
+app.use('/',fetchproduct)
 
  app.listen(3000,()=>{
         console.log("server created at 3000")

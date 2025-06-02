@@ -1,37 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data List</title>
+
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <style>
-    .parentdiv{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
     }
-    .childdiv{
-      background: #dee7f1;
-      width: 20%;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      table-layout: fixed;
+    }
+
+    th, td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+      
+    }
+
+    th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #555;
+      margin: 0 5px;
+      transition: color 0.2s ease;
+    }
+
+    .action-btn:hover {
+      color: #007bff;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
 <body>
-  <div class="parentdiv">
-    <% if(productlist.length>0){%>
-    <% productlist.forEach((data)=>{ %>
-    <div class="childdiv">
-      <h1><%= data.pname %></h1>
-      <img src="<%= data.pimage %>" alt="" width="100%">
-    </div>
-    <% }) %>
-    <% } else {%>
-      <div>data nhi k liye</div>
-   <%}%>
-  </div>
+
+  <h2>Data List</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach((key) => { %>
+        <tr>
+          
+          <td>
+            <div class="actions">
+             
+              <form action="/cart/<%= key._id %>" method="get" style="display:inline;">
+                <button class="action-btn" title="cart">
+                  <span >Add To Cart</span>
+                </button>
+              </form>
+
+             
+              
+
+             
+              
+            </div>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
 </body>
 </html>
-
-  
-
