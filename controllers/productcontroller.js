@@ -60,4 +60,10 @@ const deleteProduct = async (req,res)=>{
     await Product.findByIdAndDelete(id)
     res.redirect('/fetchdata');
 }
-module.exports = {uploadimage,addproduct,fetchproduct,updateproduct, updatedProduct, deleteProduct}
+
+const view = async (req,res)=>{
+    const {id} = req.params
+    const data = await Product.findById(id)
+    res.render('productpage',{data})
+}
+module.exports = {uploadimage,addproduct,fetchproduct,updateproduct, updatedProduct, deleteProduct,view}

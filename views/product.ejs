@@ -81,6 +81,11 @@
       <% data.forEach((key) => { %>
         <tr>
           
+         
+            <td><%= key.name %></td>
+          <td><a href="/view/<%= key._id %>"><img src="<%= key.images[0] %>" alt="" width="100%"></a></td>
+          <td><%= key.price %></td>
+       
           <td>
             <div class="actions">
              

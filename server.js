@@ -4,6 +4,8 @@
     const dashRoutes = require('./routes/dashboard')
     const addProductRoute = require('./routes/addproduct')
     const fetchproduct = require('./routes/productRoutes')
+    const cart = require('./routes/cartRoute')
+
     const bodyParser = require('body-parser')
     const multer = require('multer')
     const cookieParser = require('cookie-parser');
@@ -37,6 +39,7 @@ app.use('/', dashRoutes)
 app.use('/' ,addProductRoute)
 
 app.use('/',fetchproduct)
+app.use('/',cart)
 
  app.listen(3000,()=>{
         console.log("server created at 3000")
