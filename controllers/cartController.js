@@ -1,6 +1,6 @@
 const Cart = require('../models/cartModel')
-const { exists } = require('../models/productmodel')
 const cartController =  async (req,res)=>{
+
 const productId = req.params.id
 const userId = req.username.id
 
@@ -8,7 +8,7 @@ let cart = await Cart.findOne({userId})
 
 if(cart){
     const item = cart.product.find((items)=>items.productid==productId)
-   console.log(item)
+  
     if(item){
         item.quantity+=1
     }
