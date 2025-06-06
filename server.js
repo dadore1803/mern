@@ -5,6 +5,7 @@
     const addProductRoute = require('./routes/addproduct')
     const fetchproduct = require('./routes/productRoutes')
     const cart = require('./routes/cartRoute')
+    const homePage = require('./routes/homeRoutes')
 
     const bodyParser = require('body-parser')
     const multer = require('multer')
@@ -29,6 +30,7 @@
     })
     const uploadimage = multer({storage:productImage})
 
+app.use('/', homePage)
 
 app.use('/', signupRoutes)
 
@@ -39,6 +41,7 @@ app.use('/', dashRoutes)
 app.use('/' ,addProductRoute)
 
 app.use('/',fetchproduct)
+
 app.use('/',cart)
 
  app.listen(3000,()=>{

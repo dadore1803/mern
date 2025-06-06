@@ -11,15 +11,50 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
+      padding: 30px;
       background: #f4f4f4;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .filter-bar {
+      max-width: 600px;
+      margin: 0 auto 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .filter-bar input[type="text"] {
+      flex-grow: 1;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .filter-bar button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .filter-bar button:hover {
+      background-color: #0056b3;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       background: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       table-layout: fixed;
@@ -27,16 +62,14 @@
 
     th, td {
       padding: 15px 20px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
       text-align: center;
-      
+      border-bottom: 1px solid #ddd;
+      word-wrap: break-word;
     }
 
     th {
       background-color: #f0f0f0;
       font-weight: bold;
-    
     }
 
     tr:hover {
@@ -44,30 +77,42 @@
     }
 
     .action-btn {
-      background: none;
+      background: #28a745;
       border: none;
       cursor: pointer;
-      font-size: 20px;
-      color: #555;
-      margin: 0 5px;
-      transition: color 0.2s ease;
+      padding: 8px 12px;
+      font-size: 14px;
+      color: white;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
     }
 
     .action-btn:hover {
-      color: #007bff;
+      background-color: #218838;
     }
 
     .actions {
       display: flex;
-      align-items: center;
       justify-content: center;
+    }
+
+    img {
+      max-width: 100px;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
-  <h2>Data List</h2>
+  <h2>🛍️ Product List</h2>
 
+  <!-- Filter Bar -->
+  <form class="filter-bar" method="GET" action="/data">
+    <input type="text" name="search" placeholder="Search by name..." value="<%= typeof search !== 'undefined' ? search : '' %>">
+    <button type="submit">Filter</button>
+  </form>
+
+  <!-- Product Table -->
   <table>
     <thead>
       <tr>
@@ -78,23 +123,21 @@
       </tr>
     </thead>
     <tbody>
+      <% if (data.length === 0) { %>
+        <tr>
+          <td colspan="4">No products found</td>
+        </tr>
+      <% } %>
       <% data.forEach((key) => { %>
         <tr>
-          
-         
-            <td><%= key.name %></td>
-          <td><a href="/view/<%= key._id %>"><img src="<%= key.images[0] %>" alt="" width="100%"></a></td>
-          <td><%= key.price %></td>
-       
+          <td><%= key.name %></td>
+          <td><a href="/view/<%= key._id %>"><img src="<%= key.images[0] %>" alt="<%= key.name %>"></a></td>
+          <td>₹<%= key.price %></td>
           <td>
             <div class="actions">
-             
-              <form action="/cart/<%= key._id %>" method="get" style="display:inline;">
-                <button class="action-btn" title="cart">
-                  <span >Add To Cart</span>
-                </button>
+              <form action="/cart/<%= key._id %>" method="get">
+                <button class="action-btn" title="Add to Cart">Add To Cart</button>
               </form>
-
             </div>
           </td>
         </tr>
