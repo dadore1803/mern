@@ -8,4 +8,5 @@ router.get('/cart/:id', auth, Cart.cartController)
 router.get('/cart',auth, Cart.cartpage)
 router.get('/cart/increase/:id',auth, Cart.increaseQuantity)
 router.get('/cart/decrease/:id',auth, Cart.decreaseQuantity)
+
 module.exports = router

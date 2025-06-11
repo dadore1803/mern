@@ -62,6 +62,7 @@ const decreaseQuantity = async (req,res)=>{
     }
     res.redirect('/cart')
 }
+
 module.exports = {cartController, cartpage, increaseQuantity, decreaseQuantity}
 
 // logic ->userfind->ifuserexist->findproduct->if exists +1 else add data

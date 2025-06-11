@@ -103,12 +103,18 @@
   </style>
 </head>
 <body>
-
+ 
   <h2>🛍️ Product List</h2>
 
   <!-- Filter Bar -->
-  <form class="filter-bar" method="GET" action="/data">
-    <input type="text" name="search" placeholder="Search by name..." value="<%= typeof search !== 'undefined' ? search : '' %>">
+  <form class="filter-bar" method="get">
+    <select name="category">
+      <option value="">None</option>
+      <option value="Men">Men</option>
+      <option value="Kid">Kids</option>
+      <option value="Women">Womens</option>
+    </select>
+    <input type="radio" name="price" value="1600">1600
     <button type="submit">Filter</button>
   </form>
 

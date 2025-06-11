@@ -6,8 +6,10 @@ const authDashboard = async (req,res,next)=>{
     if(!token){
         return res.redirect("/login")
     }
-    const userData = jwt.verify(token, process.env.JWT_SECRET)
-    req.username = userData 
+   else{
+     const userData = jwt.verify(token, process.env.JWT_SECRET)
+     req.username = userData
+   } 
    
     next()
 

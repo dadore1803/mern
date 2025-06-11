@@ -1,4 +1,6 @@
+require('dotenv').config(); 
     const express = require('express')
+    const bodyParser = require('body-parser')
     const signupRoutes = require('./routes/signuproutes')
     const loginRoutes = require('./routes/loginroutes')
     const dashRoutes = require('./routes/dashboard')
@@ -6,16 +8,13 @@
     const fetchproduct = require('./routes/productRoutes')
     const cart = require('./routes/cartRoute')
     const homePage = require('./routes/homeRoutes')
-
-    const bodyParser = require('body-parser')
+    const userAuth = require('./authentication/auth')
+    const checkout = require('./routes/checkoutRoute')
+   
     const multer = require('multer')
     const cookieParser = require('cookie-parser');
-    require('dotenv').config(); 
-
     const app = express()
-  
     app.use(cookieParser());
-
     app.use(express.static('public'))
 
     app.set('view engine', 'ejs')
@@ -28,7 +27,7 @@
             tempname(null,file.originalname)
         },
     })
-    const uploadimage = multer({storage:productImage})
+const uploadimage = multer({storage:productImage})
 
 app.use('/', homePage)
 
@@ -43,6 +42,8 @@ app.use('/' ,addProductRoute)
 app.use('/',fetchproduct)
 
 app.use('/',cart)
+app.use('/',checkout)
+
 
  app.listen(3000,()=>{
         console.log("server created at 3000")
