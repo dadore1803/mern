@@ -126,13 +126,57 @@
 
       <div class="total-price">Total Price: ₹<%= total %></div>
 
-      <form action="/checkout" method="POST" class="text-end mt-3">
-        <input type="hidden" name="totalAmount" value="<%= total %>">
-        <button type="submit" class="btn btn-success px-4 py-2">Proceed to Checkout</button>
+      <form id="paymentForm" class="text-end mt-3">
+        <input type="hidden" id="totalAmount" value="<%= total %>">
+        <button type="button" id="rzp-button" class="btn btn-success px-4 py-2">Proceed to Checkout</button>
       </form>
+
     <% } else { %>
       <div class="empty-cart">Your cart is empty 🛍️</div>
     <% } %>
   </div>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"> </script>
+</script>
+<script>
+  document.getElementById('rzp-button').onclick = async function (e) {
+    e.preventDefault();
+    const amount = document.getElementById('totalAmount').value;
+
+    const res = await fetch('/createOrder', 
+    {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({totalAmount:amount})
+    });
+    const order = await res.json();
+
+
+    const options = {
+      key: order.key, 
+      amount: order.amount, 
+      currency: order.currency,
+      order_id : order.orderId,
+      handler: async function (response){
+        await fetch('/saveOrder',{
+          method:'POST',
+          headers:{'Content-Type': 'application/json'},
+          body:JSON.stringify({
+            razorpay_payment_id:response.razorpay_payment_id,
+            razorpay_order_id:response.razorpay_order_id,
+            amount:amount
+          })
+        })
+        alert("payment done cart clear")
+      },
+      
+      theme: {
+        color: '#F37234'
+      },
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+  }
+</script>
 </body>
 </html>

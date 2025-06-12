@@ -9,14 +9,14 @@ require('dotenv').config();
     const cart = require('./routes/cartRoute')
     const homePage = require('./routes/homeRoutes')
     const userAuth = require('./authentication/auth')
-    const checkout = require('./routes/checkoutRoute')
+    const checkout = require('./routes/paymentRoute')
    
     const multer = require('multer')
     const cookieParser = require('cookie-parser');
     const app = express()
     app.use(cookieParser());
     app.use(express.static('public'))
-
+    app.use(express.json());
     app.set('view engine', 'ejs')
     app.set('views',__dirname + '/views')
     app.use(bodyParser.urlencoded({extended:true}))
@@ -42,11 +42,12 @@ app.use('/' ,addProductRoute)
 app.use('/',fetchproduct)
 
 app.use('/',cart)
-app.use('/',checkout)
+
+app.use('/', checkout)
 
 
- app.listen(3000,()=>{
+app.listen(3000,()=>{
         console.log("server created at 3000")
-    })
+})
 
 // jsonwebtoken, cookie-parser, .env(dotenv)

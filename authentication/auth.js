@@ -8,7 +8,7 @@ const authDashboard = async (req,res,next)=>{
     }
    else{
      const userData = jwt.verify(token, process.env.JWT_SECRET)
-     req.username = userData
+     req.username = userData.username
    } 
    
     next()
