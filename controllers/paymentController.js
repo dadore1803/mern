@@ -27,19 +27,21 @@ const option = {
 }
 
 
-
 const saveOrder = async (req,res)=>{
 const {razorpay_payment_id, razorpay_order_id, amount} = req.body 
 const username = req.username
+const userId = req.username.id
+const cart = await Cart.findOne({userId})
 const order = new Order({
     paymentId:razorpay_payment_id,
     orderId:razorpay_order_id,
     amount:amount,
     username,
+    product:cart.product,
     status:"Paid"
 })
 await order.save()
-const userId = req.username.id
+
 await Cart.findOneAndDelete({userId})
 res.status(200).json({message:"payment done"})
 }

@@ -5,6 +5,9 @@ const orderSchema = mongoose.Schema({
     orderId:String,
     amount:Number,
     username:String,
+    product:[String],
+    phone:String,
+    email:String,
     status:String,
     created:{type:Date, default:Date.now}
 })
