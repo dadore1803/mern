@@ -144,6 +144,27 @@
     </tbody>
   </table>
 
+  <div class="pagination" style="display: flex;justify-content: center;">
+  <% if (totalpages>1){%>
+    <% if (currentpage > 1) { %>
+    <a href="/products?page=<%= currentpage - 1 %>">prev</a>
+    <% } else{%>
+        <a href="#">prev</a>
+      <% }%>
+  <% for (let i = 1; i<=totalpages; i++){%>
+    <% if(i==currentpage){%>
+      <span><%= i %></span>
+      <%}else{%>
+        <a href="/products?page=<%= i %>"><%= i %></a>
+      <%}%>
+  <%}%>
+    <% if (currentpage < totalpages){%>
+    <a href="/products?page=<%= currentpage + 1 %>">next</a>
+    <%} else{%>
+      <a href="#">next</a>
+      <%}%>
+    <% }%>
+  </div>
   
   
 </body>
