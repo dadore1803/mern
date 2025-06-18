@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/deepika')
+
 
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },

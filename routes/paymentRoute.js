@@ -2,7 +2,7 @@ const {createOrder,saveOrder} = require('../controllers/paymentController')
 const express = require('express')
 const router = express.Router()
 const Cart = require('../models/cartModel')
-const auth = require('../authentication/auth')
+const {auth} = require('../authentication/auth')
 router.post('/createOrder', auth, createOrder)
 router.post('/saveOrder', auth, saveOrder)
 

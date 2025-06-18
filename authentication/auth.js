@@ -1,18 +1,33 @@
+const jwt = require('jsonwebtoken');
 
-const jwt = require('jsonwebtoken')
-const authDashboard = async (req,res,next)=>{
-    const token= req.cookies.token
-    
-    if(!token){
-        return res.redirect("/login")
+const auth = (req, res, next) => {
+    const token = req.cookies.token;
+
+    if (!token) {
+        return res.redirect('/login');
     }
-   else{
-     const userData = jwt.verify(token, process.env.JWT_SECRET)
-     req.username = userData.username
-   } 
-   
-    next()
 
-}
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (err) {
+        return res.redirect('/login');
+    }
+};
 
-module.exports = authDashboard
+const isAdmin = (req, res, next) => {
+    if (req.user.role !== 'admin') {
+        return res.redirect('/login');
+    }
+    next();
+};
+
+const isCandidate = (req, res, next) => {
+    if (req.user.role !== 'candidate') {
+        return res.redirect('/login');
+    }
+    next();
+};
+
+module.exports = { auth, isAdmin, isCandidate };

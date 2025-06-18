@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {uploadimage, addproduct, fetchproduct,updateproduct, updatedProduct, deleteProduct,view} = require('../controllers/productcontroller')
 const Product = require('../models/productmodel')
-const auth = require('../authentication/auth')
+const {auth,isAdmin,isCandidate} = require('../authentication/auth')
 
 
 

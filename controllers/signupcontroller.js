@@ -1,9 +1,9 @@
 const Signup = require("../models/signupmodel")
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const jwt_secret = "yourkey"
+
 exports.createUser = async (req,res)=>{
-    const {username, phone, password, accountType} = req.body
+    const {username, phone, password} = req.body
     
   const existUser = await Signup.findOne({$or:[{phone}]})
   if(existUser){
@@ -11,7 +11,11 @@ exports.createUser = async (req,res)=>{
   }
 const hashPassword = await bcrypt.hash(password,10)
 
-const token = jwt.sign({phone}, jwt_secret)
+const token = jwt.sign(
+  { role: 'candidate', username: username },
+  process.env.JWT_SECRET,
+  { expiresIn: '1d' }
+);
 
 
         const data = new Signup({
