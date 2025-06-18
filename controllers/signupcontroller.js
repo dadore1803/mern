@@ -22,7 +22,7 @@ const token = jwt.sign(
             username,
             phone,
             password:hashPassword,
-            accountType,
+            accountType:"candidate",
             token,
         })
         data.save()

@@ -11,7 +11,7 @@ require('dotenv').config();
     const homePage = require('./routes/homeRoutes')
     const userAuth = require('./authentication/auth')
     const checkout = require('./routes/paymentRoute')
-    mongoose.connect('mongodb+srv://mernproject:mernproject@cluster0.tjlde0o.mongodb.net/deepika?retryWrites=true&w=majority')
+    mongoose.connect('mongodb+srv://mernproject:mernproject@deepika.tjlde0o.mongodb.net/deepika?retryWrites=true&w=majority')
 
     const multer = require('multer')
     const cookieParser = require('cookie-parser');
